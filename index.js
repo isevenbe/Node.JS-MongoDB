@@ -20,9 +20,9 @@ require("./routes/modelRoutes")(app);
 
 
 // choose what port on which to run the server
-const PORT = 2625;
+const PORT = 80;
 
 // use the app variable and listen on the port
-app.listen(PORT, () => {
+app.listen(PORT || process.env.PORT, () => {
   console.log(`Server running on *${PORT}`);
 });
