@@ -38,8 +38,8 @@ module.exports = (app) => {
       if (err) {
         res.send(err);
       }
-      res.send({ message: "Student Added IN DB" });
     });
+    res.sendStatus(200)
   });
 
   app.put("/student/:id", (req, res) => {
