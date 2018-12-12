@@ -18,7 +18,7 @@ In order to train on the basis of Coach Anthony's course I created an API to man
 
 #### Link of the API :
 
-1. POST : serverhost/watch/
+1. POST : https://watchmanager.herokuapp.com/student/
 ```
 POST BODY :
 {
