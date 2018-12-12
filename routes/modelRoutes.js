@@ -7,7 +7,7 @@ module.exports = (app) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
-});
+  });
 
   app.get("/student", (req, res) => {
     studentModels.find((err, student) => {
@@ -24,7 +24,7 @@ module.exports = (app) => {
       console.log(`${result._id} as fetched`);
     });
   });
-  
+
   app.post("/student", (req, res) => {
     let student = new studentModels();
     student.studentName = req.body.studentName;
