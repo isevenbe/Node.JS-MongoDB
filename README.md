@@ -32,7 +32,6 @@ POST BODY :
 ```
 PUT BODY : 
 {
-"studentName" : "String",
 "nextWatchDate" : "String",
 "nextWatchSubject" : "String"
 }
