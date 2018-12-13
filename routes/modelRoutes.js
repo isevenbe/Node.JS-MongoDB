@@ -1,4 +1,4 @@
-const studentModels = require("../models/MyModel")
+const studentModels = require("../models/MyModel");
 
 module.exports = (app) => {
 
@@ -28,37 +28,42 @@ module.exports = (app) => {
   app.post("/student", (req, res) => {
     let student = new studentModels();
     student.studentName = req.body.studentName;
-    student.nextWatchDate = "";
-    student.pastWatch = "";
+        student.nextWatchDate = "";
     student.nextWatchSubject = "";
-    student.pastWatchDate = new Array();
-    student.pastWatchSubject = new Array();
+
 
     student.save(function (err) {
       if (err) {
         res.send(err);
       }
     });
-    res.sendStatus(200)
+    console.log("______________________________________________________________________________________");
+    console.log(`User : ${student.studentName} as been CREATED under id : ${student._id}`);
+    console.log("______________________________________________________________________________________");
+    res.sendStatus(201);
   });
 
   app.put("/student/:id", (req, res) => {
-    let id = { _id: req.params.id };
+    let id = { _id: req.params.id};
+    let studentName = { studentName: res.studentName}
     let updatedValue = {
       $set: {
-        studentName: req.body.studentName,
         nextWatchDate: req.body.nextWatchDate,
-        pastWatch: req.body.pastWatch,
         nextWatchSubject: req.body.nextWatchSubject,
-        pastWatchDate: req.body.pastWatchDate,
-        pastWatchSubject: req.body.pastWatchSubject
+      },
+      $push: {
+        pastWatchDate: req.body.nextWatchDate,
+        pastWatchSubject: req.body.nextWatchSubject
       }
     }
-
     studentModels.updateOne(id, updatedValue, (err, res) => {
       if (err) throw err;
-      console.log(`${id._id} as been update`);
+      console.log("______________________________________________________________________________________");
+      console.log(`User : ${studentName.studentName} as been UPDATED under id : ${id._id}`);
+      console.log(`Information UPDATED : WatchDate : ${updatedValue.$set.nextWatchDate} WatchSubject : ${updatedValue.$set.nextWatchSubject}`);
+      console.log("______________________________________________________________________________________");
     });
+
     res.sendStatus(200)
   });
 

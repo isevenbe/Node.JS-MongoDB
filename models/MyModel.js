@@ -8,9 +8,6 @@ const SchemaStudent = new mongoose.Schema({
     nextWatchDate: {
         type: String
     },
-    pastWatch: {
-        type: String
-    },
     nextWatchSubject: {
         type: String
     },

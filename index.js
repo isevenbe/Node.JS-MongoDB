@@ -2,9 +2,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const url = process.env.MONGOLAB_URI;
 
 // Connection to MongoDB
-mongoose.connect("mongodb://sevendb:sevendb1@ds129904.mlab.com:29904/firstapi", { useNewUrlParser: true });
+// mongoose.connect("mongodb://sevendb:sevendb1@ds129904.mlab.com:29904/firstapi", { useNewUrlParser: true });
+mongoose.connect(url, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => { console.log("Connection to Mongoose Success..."); });
