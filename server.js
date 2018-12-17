@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const url = process.env.MONGOLAB_URI;
 const config = require('./config');
-const apiRoutes = express.Router(); 
 
 // Connection to MongoDB
 mongoose.connect(url, { useNewUrlParser: true });
@@ -13,15 +12,15 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => { console.log("Connection to Mongoose Success..."); });
 
 // Load my app
-let app = express.Router();
+let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //use morgan to log requests to the console
 // app.use(morgan('dev'));
-require("./routes/modelRoutes")(app, apiRoutes);
-require("./routes/usersRoutes")(app, apiRoutes);
+require("./routes/modelRoutes")(app);
+require("./routes/usersRoutes")(app);
 
 //send a basic path when you go on the API
 app.get('/', function (req, res) {
