@@ -4,9 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const url = process.env.MONGOLAB_URI;
 var morgan      = require('morgan');
-var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
-var User   = require('./models/studentModel'); // get our mongoose model
 
 // Connection to MongoDB
 mongoose.connect(url, { useNewUrlParser: true });
@@ -21,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //use morgan to log requests to the console
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 require("./routes/modelRoutes")(app);
 require("./routes/usersRoutes")(app);
 

@@ -1,5 +1,5 @@
 const usersModel = require("../models/usersModel");
-
+const jwt = require('jsonwebtoken');
 module.exports = (app) => {
   app.get('/setup', function (req, res) {
 
@@ -47,7 +47,7 @@ module.exports = (app) => {
           const payload = {
             admin: user.admin
           };
-          var token = jwt.sign(payload, app.get('superSecret'), {
+          let token = jwt.sign(payload, app.get('superSecret'), {
             expiresInMinutes: 1440 // expires in 24 hours
           });
 
