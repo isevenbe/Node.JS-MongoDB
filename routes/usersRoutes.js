@@ -1,5 +1,7 @@
 const usersModel = require("../models/usersModel");
 const jwt = require('jsonwebtoken');
+const apiRoutes = express.Router(); 
+
 module.exports = (app) => {
 
   app.get("/users", (req, res) => {
