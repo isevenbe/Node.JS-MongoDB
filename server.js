@@ -3,9 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const url = process.env.MONGOLAB_URI;
+var morgan      = require('morgan');
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var config = require('./config'); // get our config file
+var User   = require('./models/studentModel'); // get our mongoose model
 
 // Connection to MongoDB
-// mongoose.connect("mongodb://sevendb:sevendb1@ds129904.mlab.com:29904/firstapi", { useNewUrlParser: true });
 mongoose.connect(url, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -17,9 +20,18 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(bodyParser.json());
+//use morgan to log requests to the console
+app.use(morgan('dev'));
 require("./routes/modelRoutes")(app);
+require("./routes/usersRoutes")(app);
 
+//send a basic path when you go on the API
+app.get('/', function(req, res) {
+  res.send("Hello before starting you must go on my <a href='https://github.com/isevenbe/Node.JS-MongoDB'>GutHub repository</a>");
+});
+
+ // secret variable
+app.set('superSecret', config.secret);
 
 // choose what port on which to run the server
 const port = process.env.PORT || 3000;

@@ -1,6 +1,24 @@
-const studentModels = require("../models/MyModel");
+const studentModels = require("../models/studentModel");
 
 module.exports = (app) => {
+
+  app.get('/setup', function(req, res) {
+
+    // create a sample user
+    var nick = new User({ 
+      name: 'Nick Cerminara', 
+      password: 'password',
+      admin: true 
+    });
+  
+    // save the sample user
+    nick.save(function(err) {
+      if (err) throw err;
+  
+      console.log('User saved successfully');
+      res.json({ success: true });
+    });
+  });
 
   app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
