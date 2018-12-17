@@ -18,4 +18,10 @@ module.exports = (app) => {
           res.json({ success: true });
         });
       });
+
+      app.get("/users", (req, res) => {
+        usersModel.find({}, (err, users) => {
+            res.json(users);
+        })
+      })
 }
