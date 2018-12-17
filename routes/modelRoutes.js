@@ -12,7 +12,9 @@ module.exports = (app) => {
   app.get("/student", (req, res) => {
     studentModels.find((err, student) => {
       if (err)
+      console.log("______________________________________________________________________________________");
         console.log('ERROR :', err);
+        console.log("______________________________________________________________________________________");
       res.send(student);
     });
   });
@@ -21,7 +23,9 @@ module.exports = (app) => {
     let id = req.params.id;
     studentModels.findOne({ _id: id }).then(result => {
       res.send(result);
+      console.log("______________________________________________________________________________________");
       console.log(`${result._id} as fetched`);
+      console.log("______________________________________________________________________________________");
     });
   });
 
@@ -71,7 +75,9 @@ module.exports = (app) => {
     let id = { _id: req.params.id };
     studentModels.deleteOne(id, (err, res) => {
       if (err) throw err;
+      console.log("______________________________________________________________________________________");
       console.log(`${id._id} as been deleted`);
+      console.log("______________________________________________________________________________________");
     });
     res.sendStatus(200)
   });
