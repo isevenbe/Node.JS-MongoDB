@@ -3,8 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const url = process.env.MONGOLAB_URI;
-var morgan      = require('morgan');
-var config = require('./config'); // get our config file
+const config = require('./config');
 
 // Connection to MongoDB
 mongoose.connect(url, { useNewUrlParser: true });
